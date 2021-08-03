@@ -3,19 +3,11 @@ const mongoose = require('mongoose');
 
 const Report = require('./models/reports');
 
-if (process.env.NODE_ENV !== 'production') require('dotenv').config();
-
-const mongoURI = process.env.MONGO_URI;
-try {
-    mongoose.connect(mongoURI, {
-        useUnifiedTopology: true,
-        useNewUrlParser: true,
-    });
-
-    console.log('MongoDB connected');
-} catch (error) {
-    console.log(error);
-}
+mongoose.connect('mongodb://localhost:27017/reportDB', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+mongoose.set('useCreateIndex', true);
 
 const app = express();
 
